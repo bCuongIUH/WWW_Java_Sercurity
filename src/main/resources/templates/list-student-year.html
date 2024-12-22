@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>List Students Born in 2002</title>
+</head>
+<body>
+    <h1>List Students Born in 2002</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Birthday</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Lặp qua danh sách sinh viên -->
+            <tr th:each="student : ${students}">
+                <td th:text="${student.id}"></td>
+                <td th:text="${student.name}"></td>
+                <td th:text="${student.phone}"></td>
+                <td th:text="${student.email}"></td>
+                <td th:text="${student.address}"></td>
+                <td th:text="${student.birthday}"></td>
+                <td>
+                    <a th:href="@{'/edit-student/' + ${student.id}}">Edit</a>
+                    <a th:href="@{'/delete-student/' + ${student.id}}">Delete</a>
+                </td>
+            </tr>
+            <!-- Hiển thị thông báo nếu không có sinh viên -->
+            <tr th:if="${students.isEmpty()}">
+                <td colspan="7" style="text-align: center;">No students born in 2002 found</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

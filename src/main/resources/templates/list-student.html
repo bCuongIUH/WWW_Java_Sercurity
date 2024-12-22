@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>List Student</title>
+</head>
+<body>
+	<div
+		style=" justify-content: center; align-items: center; display: flex">
+		<img
+			src="https://www.tutorialspoint.com/spring/images/spring-mini-logo.jpg" />
+	</div>
+
+	<h1 style="text-align: center;">List Student</h1>
+	<table border="1" width="100%">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Address</th>
+				<th>Birthday</th>
+				<th>Balance(s)</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+			<tr th:each="student : ${students}">
+				<td th:text="${student.id}"></td>
+				<td th:text="${student.name}"></td>
+				<td th:text="${student.phone}"></td>
+				<td th:text="${student.email}"></td>
+				<td th:text="${student.address}"></td>
+				<td th:text="${student.birthday}"></td>
+				<td>
+					
+					<ul>
+						<li th:each="account : ${student.accounts}"
+							th:text="${account.balance}"></li>
+					</ul>
+				</td>
+				<td><a th:href="@{'/edit-student/' + ${student.id}}">Edit</a> <a
+					th:href="@{'/delete-student/' + ${student.id}}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
